@@ -17,13 +17,13 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
-from sklearn.preprocessing import OrdinalEncoder
-from sklearn.preprocessing import LabelEncoder
-from sklearn.feature_selection import chi2
+from scikit-learn.preprocessing import OrdinalEncoder
+from scikit-learn.preprocessing import LabelEncoder
+from scikit-learn.feature_selection import chi2
 from scipy.stats import pointbiserialr
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.model_selection import StratifiedShuffleSplit
-from sklearn.model_selection import train_test_split
+from scikit-learn.preprocessing import OneHotEncoder
+from scikit-learn.model_selection import StratifiedShuffleSplit
+from scikit-learn.model_selection import train_test_split
 from tabulate import tabulate
 from matplotlib.patches import Patch
 
@@ -178,7 +178,7 @@ mapped_instn_clgs = feat_select['INSTN_CLGS_W116'].map(instn_mapping)
 mapped_instn_k12 = feat_select['INSTN_K12_W116'].map(instn_mapping)
 mapped_f_voted2020 = feat_select['F_VOTED2020'].map(f_voted2020_mapping)
 
-from sklearn.preprocessing import OneHotEncoder
+from scikit-learn.preprocessing import OneHotEncoder
 hotEncoder = OneHotEncoder(sparse_output=False)
 
 # One-hot encoding for INSTN_CLGS_W116
@@ -670,9 +670,9 @@ feat_select_encoded = feat_select_encoded.dropna().copy()
 ### Task: link explanation to a doc
 """
 
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from scikit-learn.model_selection import train_test_split
+from scikit-learn.linear_model import LogisticRegression
+from scikit-learn.metrics import classification_report, confusion_matrix, accuracy_score
 
 # Step 1: Prepare the data
 X = feat_select_encoded.drop(columns=["Voted in 2020"])  # Features
@@ -708,8 +708,8 @@ print(f"\nAccuracy Score: {accuracy:.2%}")
 # Random Forest
 Link analysis"""
 
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from scikit-learn.ensemble import RandomForestClassifier
+from scikit-learn.metrics import classification_report, confusion_matrix, accuracy_score
 
 # Train a Random Forest model
 rf_model = RandomForestClassifier(random_state=42, class_weight='balanced', n_estimators=100)
@@ -738,7 +738,7 @@ print(f"\nAccuracy Score: {accuracy:.2%}")
 # Support Vector Machine SVM
 add results analysis doc"""
 
-from sklearn.svm import SVC
+from scikit-learn.svm import SVC
 
 # Train an SVM model
 svm_model = SVC(kernel='linear', class_weight='balanced', random_state=42)
