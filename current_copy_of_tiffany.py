@@ -17,6 +17,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 import sklearn
+import streamlit as st
 # import tpot
 # from tpot import TPOTClassifier
 
@@ -69,8 +70,8 @@ for column in feat_select.columns:
 
 feat_select
 
-"""# 
-# Cleaning Data
+"""
+# Cleaned Data
 """
 
 # Clean EMPLSIT_W116
@@ -112,7 +113,8 @@ print("After converting to integer:", feat_select['F_VOTED2020_encoded'].unique(
 
 # Verify the cleaned column
 print(feat_select['F_VOTED2020_encoded'].value_counts())
-
+# Display the cleaned dataset
+feat_select
 # Replace dtype object to int or float
 
 # Replace "No Answer" with a placeholder numeric value
@@ -121,6 +123,11 @@ feat_select['INSTN_K12_W116'] = feat_select['INSTN_K12_W116'].astype(str).replac
 
 # Replace object dType due to non-numerical characters (' ', "99", etc)
 feat_select['EMPLSIT_W116'] = feat_select['EMPLSIT_W116'].astype(int)
+
+"""
+# Map and Encode Features
+"""
+
 
 # Map and encode features
 whadvant_mapping = {
@@ -205,18 +212,18 @@ feat_select = pd.concat([
 ], axis=1)
 
 feat_select.info()
+feat_select
 
 """
-
----
-F_Voted2020
+# F_Voted2020 Analysis
 """
+
 
 plt.figure(figsize=(8, 5))  #new figure for each plot
 feat_select['F_VOTED2020_encoded'].value_counts().sort_index().plot(
         kind='bar')
 
-"""#Graphs for Encoded Features
+"""
 
 *   Importance of Economy
 *   Importance of Immigration
@@ -339,6 +346,7 @@ plot_encoded_distribution(
         "A great deal"
     ]
 )
+# st.dataframe(pastel_palette)
 
 """
 # Rename Columns For Improved Readability
@@ -460,8 +468,6 @@ compare_props
     -Stratified sampling ensures that every class in F_VOTED2020 is proportionally represented in both training and test sets, even for rare -classes like 99.
     This leads to a more representative test set and fair evaluation of the model.
 
----
-Dont allow grouped one-hot encoded columns to compare to one another
 """
 
 one_hot_groups = {
@@ -487,9 +493,8 @@ corr_matrix = numeric_columns.corr()
 print("Columns included in correlation calculation:")
 print(numeric_columns.columns.tolist())
 
-"""---
-Correlation | List of Top Correlations
-
+"""
+# Correlation | List of Top Correlations 
 """
 
 import pandas as pd
@@ -556,13 +561,12 @@ filtered_corr_values_positive = filtered_corr_values_positive.sort_values(by="Co
 
 # Display all positive correlations
 print("All Positive Correlations (after filtering within groups):")
+
 print(tabulate(filtered_corr_values_positive, headers="keys", tablefmt="fancy_grid"))
+st.subheader("All Positive Correlations (after filtering within groups):")
+st.dataframe(filtered_corr_values_positive)
 
-"""
-
----
-
-Heat Map to Visualize Correlations"""
+st.header("Heat Map to Visualize Correlations")
 
 # Step 1: Calculate the correlation matrix for the dataset
 corr = feat_select_encoded.corr()
@@ -633,12 +637,12 @@ plt.title("Heatmap of Correlations (Excluding One-Hot Encoded Comparisons)")
 plt.xticks(rotation=45, ha='right')  # Rotate labels for better readability
 plt.tight_layout()  # Adjust layout to fit everything well
 plt.show()
+st.pyplot(f)
 
-"""---
-# Models
 
-# Linear Regression
-"""
+st.header("Models")
+st.subheader("Linear Regression")
+
 
 feat_select_encoded = feat_select_encoded.dropna().copy()
 
@@ -668,21 +672,23 @@ y_pred = log_reg.predict(X_test)
 cm = confusion_matrix(y_test, y_pred)
 print("\nConfusion Matrix:")
 print(tabulate(cm, headers=["Predicted 0", "Predicted 1"], tablefmt="fancy_grid"))
+st.subheader("Confusion Matrix")
+st.dataframe(cm)
 
 # Classification Report
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred, digits=2))
+st.subheader("Classification Report")
+st.write(classification_report(y_test, y_pred, digits=2))
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred)
 print(f"\nAccuracy Score: {accuracy:.2%}")
+st.subheader("Accuracy Score")
+st.write(f"{accuracy:.2%}")
 
-"""
 
----
-
-# Random Forest
-Link analysis"""
+st.subheader("Random Forest")
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
@@ -698,16 +704,22 @@ y_pred_rf = rf_model.predict(X_test)
 cm = confusion_matrix(y_test, y_pred_rf)
 print("\nConfusion Matrix:")
 print(tabulate(cm, headers=["Predicted 0", "Predicted 1"], tablefmt="fancy_grid"))
+st.subheader("Confusion Matrix")
+st.dataframe(cm)
 
 # Classification Report
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_rf, digits=2))
+st.subheader("Classification Report")
+st.write(classification_report(y_test, y_pred_rf, digits=2))
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred_rf)
 print(f"\nAccuracy Score: {accuracy:.2%}")
+st.subheader("Accuracy Score")
+st.write(f"{accuracy:.2%}")
 
-"""#### Tuning Random Forest Alghoritm"""
+st.subheader("Tuning Random Forest Algorithm")
 
 from sklearn.model_selection import GridSearchCV
 
@@ -730,6 +742,8 @@ grid_search = GridSearchCV(
 grid_search.fit(X_train, y_train)
 
 print("Best Parameters: ",grid_search.best_params_)
+st.subheader("Best Parameters")
+st.write(grid_search.best_params_)
 best_rf_model = grid_search.best_estimator_
 
 best_rf_model = grid_search.best_params_
@@ -752,21 +766,22 @@ y_pred_tuned = tuned_rf_model.predict(X_test)
 cm = confusion_matrix(y_test, y_pred_tuned)
 print("\nConfusion Matrix:")
 print(tabulate(cm, headers=["Predicted 0", "Predicted 1"], tablefmt="fancy_grid"))
+st.subheader("Confusion Matrix")
+st.dataframe(cm)
 
 # Classification Report
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_tuned, digits=2))
+st.subheader("Classification Report")
+st.write(classification_report(y_test, y_pred_tuned, digits=2))
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred_tuned)
 print(f"\nAccuracy Score: {accuracy:.2%}")
+st.subheader("Accuracy Score")
+st.write(f"{accuracy:.2%}")
 
-"""
-
----
-
-# Support Vector Machine SVM
-add results analysis doc"""
+st.subheader("Support Vector Machine (SVM)")
 
 from sklearn.svm import SVC
 
@@ -781,17 +796,22 @@ y_pred_svm = svm_model.predict(X_test)
 cm = confusion_matrix(y_test, y_pred_svm)
 print("\nConfusion Matrix:")
 print(tabulate(cm, headers=["Predicted 0", "Predicted 1"], tablefmt="fancy_grid"))
+st.subheader("Confusion Matrix")
+st.dataframe(cm)
 
 # Classification Report
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_svm, digits=2))
+st.subheader("Classification Report")
+st.write(classification_report(y_test, y_pred_svm, digits=2))
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred_svm)
 print(f"\nAccuracy Score: {accuracy:.2%}")
+st.subheader("Accuracy Score")
+st.write(f"{accuracy:.2%}")
 
-"""#### Fine Tune the Model"""
-
+st.subheader("Fine Tune the Model")
 # Define parameter grid for SVM tuning
 param_grid = {
     'C': [0.1, 1, 10, 100],  # Regularization parameter
@@ -810,6 +830,8 @@ grid_search.fit(X_train, y_train)
 
 # Get the best parameters from GridSearchCV
 print("Best Parameters found: ", grid_search.best_params_)
+st.subheader("Best Parameters")
+st.write(grid_search.best_params_)
 
 # Get the best model from the grid search
 best_svm_model = grid_search.best_estimator_
@@ -821,21 +843,22 @@ y_pred_best_svm = best_svm_model.predict(X_test)
 cm = confusion_matrix(y_test, y_pred_best_svm)
 print("\nConfusion Matrix:")
 print(tabulate(cm, headers=["Predicted 0", "Predicted 1"], tablefmt="fancy_grid"))
+st.subheader("Confusion Matrix")
+st.dataframe(cm)
 
 # Classification Report
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_best_svm, digits=2))
+st.subheader("Classification Report")
+st.write(classification_report(y_test, y_pred_best_svm, digits=2))
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred_best_svm)
 print(f"\nAccuracy Score: {accuracy:.2%}")
+st.subheader("Accuracy Score")
+st.write(f"{accuracy:.2%}")
 
-"""
-
----
-# Gradient Boosting with XGBoost
-add result analysis"""
-
+st.subheader("Gradient Boosting with XGBoost")
 # !pip install xgboost
 
 from xgboost import XGBClassifier
@@ -855,21 +878,22 @@ y_pred_xgb = xgb_model.predict(X_test)
 cm = confusion_matrix(y_test, y_pred_xgb)
 print("\nConfusion Matrix:")
 print(tabulate(cm, headers=["Predicted 0", "Predicted 1"], tablefmt="fancy_grid"))
+st.subheader("Confusion Matrix")
+st.dataframe(cm)
 
 # Classification Report
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_xgb, digits=2))
+st.subheader("Classification Report")
+st.write(classification_report(y_test, y_pred_xgb, digits=2))
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred_xgb)
 print(f"\nAccuracy Score: {accuracy:.2%}")
+st.subheader("Accuracy Score")
+st.write(f"{accuracy:.2%}")
 
-"""
-
----
-#Gradient Boosting with LightGBM
-add analysis doc
-"""
+st.subheader("Gradient Boosting with LightGBM")
 
 from lightgbm import LGBMClassifier
 
@@ -895,12 +919,17 @@ cm_table = [
 ]
 print("\nConfusion Matrix with Labels:")
 print(tabulate(cm_table, headers="firstrow", tablefmt="grid"))
+st.subheader("Confusion Matrix")
+st.dataframe(cm)
 
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_lgbm, digits=2))
-
+st.subheader("Classification Report")
+st.write(classification_report(y_test, y_pred_lgbm, digits=2))
 accuracy = accuracy_score(y_test, y_pred_lgbm) * 100
 print(f"\nAccuracy Score: {accuracy:.2f}%")
+st.subheader("Accuracy Score")
+st.write(f"{accuracy:.2f}%")
 
 
 #attempt to run auto ml
