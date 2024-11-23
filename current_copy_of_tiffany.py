@@ -811,7 +811,7 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_svm, digits=2))
 st.subheader("Classification Report")
-target_names = ["class 0", "class 1", "class 2"]
+target_names = ["class 0", "class 1"]
 st.dataframe(
     classification_report(y_test, y_pred_svm, target_names=target_names, output_dict=True)
 )
@@ -861,7 +861,7 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_best_svm, digits=2))
 st.subheader("Classification Report")
-target_names = ["class 0", "class 1", "class 2"]
+target_names = ["class 0", "class 1"]
 st.dataframe(
     classification_report(y_test, y_pred_best_svm, target_names=target_names, output_dict=True)
 )
@@ -899,7 +899,7 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_xgb, digits=2))
 st.subheader("Classification Report")
-target_names = ["class 0", "class 1", "class 2"]
+target_names = ["class 0", "class 1"]
 st.dataframe(
     classification_report(y_test, y_pred_xgb, target_names=target_names, output_dict=True)
 )
@@ -942,7 +942,7 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_lgbm, digits=2))
 st.subheader("Classification Report")
-target_names = ["class 0", "class 1", "class 2"]
+target_names = ["class 0", "class 1"]
 st.dataframe(
     classification_report(y_test, y_pred_lgbm, target_names=target_names, output_dict=True)
 )
@@ -971,6 +971,8 @@ st.write(f"{accuracy:.2f}%")
 # # Evaluate the model
 # score = tpot.score(X_test, y_test)
 # print(f"TPOT Model Accuracy: {score:.2%}")
+# st.subheader("TPOT Model Accuracy")
+# st.write(f"{score:.2%}")
 
 # # Export the best model pipeline found
 # tpot.export('best_pipeline.py')
