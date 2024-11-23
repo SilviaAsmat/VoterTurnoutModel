@@ -5,5 +5,4 @@ numpy
 scipy
 xgboost
 lightgbm
-sklearn
 scikit-learn
