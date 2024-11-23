@@ -16,8 +16,10 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
-import sklearn 
-import pkg_resources
+import sklearn
+import tpot
+from tpot import TPOTClassifier
+
 
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.preprocessing import LabelEncoder
@@ -30,7 +32,7 @@ from tabulate import tabulate
 from matplotlib.patches import Patch
 
 
-labelEncode = LabelEncoder();
+labelEncode = LabelEncoder()
 
 
 
@@ -906,10 +908,8 @@ print(f"\nAccuracy Score: {accuracy:.2f}%")
 # pip install arcgis
 
 # !pip install tpot
-import tpot
-from tpot import TPOTClassifier
-
 #Assuming feat_select_encoded is your dataset
+
 X = feat_select_encoded.drop(columns=["Voted in 2020"])
 y = feat_select_encoded["Voted in 2020"]
 

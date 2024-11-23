@@ -8,4 +8,3 @@ lightgbm
 scikit-learn
 tabulate
 tpot
-pkg_resources
