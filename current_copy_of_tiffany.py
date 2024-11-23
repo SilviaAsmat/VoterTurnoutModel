@@ -645,10 +645,9 @@ st.subheader("Linear Regression")
 
 
 feat_select_encoded = feat_select_encoded.dropna().copy()
+st.dataframe(feat_select_encoded)
 
-"""## **Logistic Regression**
-### Task: link explanation to a doc
-"""
+st.subheader("Logistic Regression")
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
