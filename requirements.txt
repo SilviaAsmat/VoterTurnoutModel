@@ -6,3 +6,4 @@ scipy
 xgboost
 lightgbm
 scikit-learn
+tabulate
