@@ -678,7 +678,10 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred, digits=2))
 st.subheader("Classification Report")
-st.write(classification_report(y_test, y_pred, digits=2))
+target_names = ["class 0", "class 1"]
+st.dataframe(
+    classification_report(y_test, y_pred, target_names=target_names, output_dict=True)
+)
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred)
@@ -710,7 +713,10 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_rf, digits=2))
 st.subheader("Classification Report")
-st.write(classification_report(y_test, y_pred_rf, digits=2))
+target_names = ["class 0", "class 1"]
+st.dataframe(
+    classification_report(y_test, y_pred_rf, target_names=target_names, output_dict=True)
+)
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred_rf)
@@ -772,7 +778,10 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_tuned, digits=2))
 st.subheader("Classification Report")
-st.write(classification_report(y_test, y_pred_tuned, digits=2))
+target_names = ["class 0", "class 1"]
+st.dataframe(
+    classification_report(y_test, y_pred_tuned, target_names=target_names, output_dict=True)
+)
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred_tuned)
@@ -802,7 +811,10 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_svm, digits=2))
 st.subheader("Classification Report")
-st.write(classification_report(y_test, y_pred_svm, digits=2))
+target_names = ["class 0", "class 1", "class 2"]
+st.dataframe(
+    classification_report(y_test, y_pred_svm, target_names=target_names, output_dict=True)
+)
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred_svm)
@@ -849,7 +861,10 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_best_svm, digits=2))
 st.subheader("Classification Report")
-st.write(classification_report(y_test, y_pred_best_svm, digits=2))
+target_names = ["class 0", "class 1", "class 2"]
+st.dataframe(
+    classification_report(y_test, y_pred_best_svm, target_names=target_names, output_dict=True)
+)
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred_best_svm)
@@ -884,7 +899,10 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_xgb, digits=2))
 st.subheader("Classification Report")
-st.write(classification_report(y_test, y_pred_xgb, digits=2))
+target_names = ["class 0", "class 1", "class 2"]
+st.dataframe(
+    classification_report(y_test, y_pred_xgb, target_names=target_names, output_dict=True)
+)
 
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred_xgb)
@@ -924,7 +942,10 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_lgbm, digits=2))
 st.subheader("Classification Report")
-st.write(classification_report(y_test, y_pred_lgbm, digits=2))
+target_names = ["class 0", "class 1", "class 2"]
+st.dataframe(
+    classification_report(y_test, y_pred_lgbm, target_names=target_names, output_dict=True)
+)
 accuracy = accuracy_score(y_test, y_pred_lgbm) * 100
 print(f"\nAccuracy Score: {accuracy:.2f}%")
 st.subheader("Accuracy Score")
