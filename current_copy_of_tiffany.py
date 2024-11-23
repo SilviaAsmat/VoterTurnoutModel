@@ -67,10 +67,9 @@ for column in feat_select.columns:
 
 feat_select
 
+"""# 
+# Cleaning Data
 """
-
----
-#Cleaning The Data"""
 
 # Clean EMPLSIT_W116
 feat_select['EMPLSIT_W116'] = feat_select['EMPLSIT_W116'].astype(str).replace("No Answer", "99").astype(int)
