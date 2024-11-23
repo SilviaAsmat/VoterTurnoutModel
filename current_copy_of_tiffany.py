@@ -811,7 +811,7 @@ st.dataframe(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_svm, digits=2))
 st.subheader("Classification Report")
-target_names = ["class 0", "class 1"]
+target_names = ["class 1", "class 2"]
 st.dataframe(
     classification_report(y_test, y_pred_svm, target_names=target_names, output_dict=True)
 )
