@@ -2,7 +2,6 @@ pandas
 seaborn
 matplotlib
 numpy
-sklearn
 scipy
 xgboost
 lightgbm
