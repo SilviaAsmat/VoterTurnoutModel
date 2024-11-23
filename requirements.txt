@@ -6,5 +6,3 @@ sklearn
 scipy
 xgboost
 lightgbm
-catboost
-scikit-learn
