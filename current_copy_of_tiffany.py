@@ -17,6 +17,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 import sklearn 
+import pkg_resources
 
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.preprocessing import LabelEncoder
