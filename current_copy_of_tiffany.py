@@ -31,31 +31,12 @@ from matplotlib.patches import Patch
 
 labelEncode = LabelEncoder();
 
-"""connect to google drive
 
-from google.colab import drive
-drive.mount('/content/drive')
-"""
 
 raw = pd.read_csv('dataset.csv')
 
-"""# Point to dataset file and list data
-
-# List files in Google Drive (optional to verify the dataset location)
-# !ls "/content/drive/Shared drives/Project 6/"
-
-# Copy the dataset to the current directory to load it
-!cp "/content/drive/Shared drives/Project 6/dataset1.csv" .
-
-# Load the dataset using pandas
-import pandas as pd
-raw = pd.read_csv('dataset1.csv')
-#
+"""# 
 # Display an overview of the dataset
-print("Dataset Overview:")
-raw
-
----
 
 Task: Select and combine columns -> feat_select
 
@@ -88,8 +69,7 @@ feat_select
 """
 
 ---
-
-Cleaning The Data"""
+#Cleaning The Data"""
 
 # Clean EMPLSIT_W116
 feat_select['EMPLSIT_W116'] = feat_select['EMPLSIT_W116'].astype(str).replace("No Answer", "99").astype(int)
