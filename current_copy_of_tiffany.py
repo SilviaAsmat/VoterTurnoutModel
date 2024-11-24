@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sklearn
 import streamlit as st
-# import tpot
+import tpot
 from tpot import TPOTClassifier
 
 
