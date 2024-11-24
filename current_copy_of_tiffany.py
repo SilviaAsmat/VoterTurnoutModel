@@ -18,9 +18,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sklearn
 import streamlit as st
-import tpot
-from tpot import TPOTClassifier
-import pkg_resources
+# import tpot
+# from tpot import TPOTClassifier
+# import pkg_resources
 
 
 from sklearn.preprocessing import OrdinalEncoder
