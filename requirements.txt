@@ -10,3 +10,4 @@ tabulate
 tpot
 arcgis
 streamlit
+pkg_resources
