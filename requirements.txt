@@ -7,8 +7,4 @@ xgboost
 lightgbm
 scikit-learn
 tabulate
-# tpot
-# arcgis
 streamlit
-# pkg_resources
-time
