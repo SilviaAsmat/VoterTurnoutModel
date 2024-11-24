@@ -959,28 +959,28 @@ st.write(f"{accuracy:.2f}%")
 
 # !pip install tpot
 #Assuming feat_select_encoded is your dataset
+# import time
+# X = feat_select_encoded.drop(columns=["Voted in 2020"])
+# y = feat_select_encoded["Voted in 2020"]
 
-X = feat_select_encoded.drop(columns=["Voted in 2020"])
-y = feat_select_encoded["Voted in 2020"]
+# # Split the data into training and test sets
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# with st.spinner(text="In progress..."):
+#     while True:
+#         time.sleep(5)
+#         st.text("Still working...")
+#     tpot = TPOTClassifier(generations=5, population_size=50, verbosity=2, random_state=42)
+#     tpot.fit(X_train, y_train)
+#     # Evaluate the model
+#     score = tpot.score(X_test, y_test)
+# st.success("Done!")
 
-# Split the data into training and test sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-with st.spinner(text="In progress..."):
+# print(f"TPOT Model Accuracy: {score:.2%}")
+# st.subheader("TPOT Model Accuracy")
+# st.write(f"{score:.2%}")
 
-    tpot = TPOTClassifier(generations=5, population_size=50, verbosity=2, random_state=42)
-    st.write("Training the TPOT model...")
-    tpot.fit(X_train, y_train)
-    # Evaluate the model
-    st.write("Evaluating the TPOT model...")
-    score = tpot.score(X_test, y_test)
-st.success("Done!")
+# # Export the best model pipeline found
+# tpot.export('best_pipeline.py')
 
-print(f"TPOT Model Accuracy: {score:.2%}")
-st.subheader("TPOT Model Accuracy")
-st.write(f"{score:.2%}")
-
-# Export the best model pipeline found
-tpot.export('best_pipeline.py')
-
-st.subheader("Best Pipeline")
-st.write(tpot.fitted_pipeline_)
+# st.subheader("Best Pipeline")
+# st.write(tpot.fitted_pipeline_)
