@@ -764,12 +764,13 @@ tuned_rf_model = RandomForestClassifier(
 )
 
 # Train the new model
-tuned_rf_model.fit(X_train, y_train)
+rf_model = RandomForestClassifier(random_state=42, class_weight='balanced', n_estimators=100)
+rf_model.fit(X_train, y_train)
 
 # Make predictions
-y_pred_tuned = tuned_rf_model.predict(X_test)
+y_pred_rf = rf_model.predict(X_test)
 
-cm = confusion_matrix(y_test, y_pred_tuned)
+cm = confusion_matrix(y_test, y_pred_rf)
 print("\nConfusion Matrix:")
 print(tabulate(cm, headers=["Predicted 0", "Predicted 1"], tablefmt="fancy_grid"))
 st.subheader("Confusion Matrix")
@@ -777,16 +778,15 @@ st.dataframe(cm)
 
 # Classification Report
 print("\nClassification Report:")
-print(classification_report(y_test, y_pred_tuned, digits=2))
+print(classification_report(y_test, y_pred_rf, digits=2))
 st.subheader("Classification Report")
 target_names = ["class 0", "class 1"]
 st.dataframe(
-    classification_report(y_test, y_pred_tuned, target_names=target_names, output_dict=True)
+    classification_report(y_test, y_pred_rf, target_names=target_names, output_dict=True)
 )
 
 # Accuracy Score
-accuracy = accuracy_score(y_test, y_pred_tuned)
-print(f"\nAccuracy Score: {accuracy:.2%}")
+accuracy = accuracy_score(y_test, y_pred_rf)
 st.subheader("Accuracy Score")
 st.write(f"{accuracy:.2%}")
 
